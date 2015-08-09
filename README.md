@@ -24,9 +24,9 @@ Get an item from the Redis store, provided a recognized `cacheKey`
 
 var redis       = require('redis'),
     redisClient = redis.createClient(),
-    cacheUtils  = require('alien-node-redis-utils');
+    cacheUtils  = require('alien-node-redis-utils')(redisClient);
     
-cacheUtils.getItem(redisClient, 'someKey')
+cacheUtils.getItem('someKey')
   .then(function(item) {
     // cool
   })
@@ -43,14 +43,14 @@ Set an item in the Redis store. Adds if key does not exist, otherwise updates th
 
 var redis       = require('redis'),
     redisClient = redis.createClient(),
-    cacheUtils  = require('alien-node-redis-utils');
+    cacheUtils  = require('alien-node-redis-utils')(redisClient);
     
 var TWO_HOURS_IN_SECONDS_CACHE_EXPIRE = 1000 * 60 * 60 * 2;
 
 var cacheKey = 'someKey', 
     data     = { foo : 'bar' };
     
-cacheUtils.setItem(redisClient, cacheKey, TWO_HOURS_IN_SECONDS_CACHE_EXPIRE, data);
+cacheUtils.setItem(cacheKey, TWO_HOURS_IN_SECONDS_CACHE_EXPIRE, data);
   .then(function(data) {
     // cool
   });
@@ -64,9 +64,9 @@ Delete an item from the Redis store, provided a recognized `cacheKey`
 
 var redis       = require('redis'),
     redisClient = redis.createClient(),
-    cacheUtils  = require('alien-node-redis-utils');
+    cacheUtils  = require('alien-node-redis-utils')(redisClient);
 
-cacheUtils.deleteItem(redisClient, 'someKey')
+cacheUtils.deleteItem('someKey')
   .then(function() {
     // cool
   })
