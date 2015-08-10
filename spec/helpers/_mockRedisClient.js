@@ -16,7 +16,7 @@ var _set = function(cacheKey, stringifiedData) {
   return cacheKey;
 };
 
-var _expires = function(cacheKey, ttl) {
+var _expire = function(cacheKey, ttl) {
   return cacheKey;
 };
 
@@ -24,7 +24,7 @@ var mockRedisClient = {
   'get'     : _get,
   'del'     : _del,
   'set'     : _set,
-  'expires' : _expires
+  'expire'  : _expire
 };
 
 module.exports = mockRedisClient;
