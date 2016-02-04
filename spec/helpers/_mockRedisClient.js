@@ -20,10 +20,19 @@ var _expire = function(cacheKey, ttl) {
   return cacheKey;
 };
 
+var _keys = function(cacheKey, callback) {
+  if (cacheKey === constants.FAKE_CACHE_KEY_EXISTS) {
+    return callback(undefined, [cacheKey]);
+  } else {
+    return callback(undefined, []);
+  }
+};
+
 var mockRedisClient = {
   'get'     : _get,
   'del'     : _del,
   'set'     : _set,
+  'keys'    : _keys,
   'expire'  : _expire
 };
 
