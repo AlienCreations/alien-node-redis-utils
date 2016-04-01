@@ -75,3 +75,69 @@ cacheUtils.deleteItem('someKey')
   });
 
 ```
+
+## Helpers
+
+#### maybeAddToQueryCache
+Checks for an existing record matching `cacheKey` and appends/prepends `item`
+
+```js
+
+var User = require('/path/to/user/model'),
+    data = {name : 'joe'};
+
+var redis       = require('redis'),
+    redisClient = redis.createClient(),
+    cacheUtils  = require('alien-node-redis-utils')(redisClient);
+
+var CACHE_KEY    = 'api.users',
+    CACHE_EXPIRE = 1000 * 60 * 60 * 24;
+
+return User.create(data).then(function(user) {
+  return cacheUtils.maybeAddToQueryCache(CACHE_KEY, CACHE_EXPIRE, user);
+});
+
+```
+
+#### pluckFromQueryCache
+Checks for an existing record matching `cacheKey`, looks for an item matching a
+ provided `identifierProperty`, removes the item and resets the cache.
+
+```js
+
+var User = require('/path/to/user/model'),
+    data = {id : 123};
+
+var redis       = require('redis'),
+    redisClient = redis.createClient(),
+    cacheUtils  = require('alien-node-redis-utils')(redisClient);
+
+var CACHE_KEY   = 'api.users';
+
+return User.delete(data)
+  .thenResolve(data)
+  .then(cacheUtils.pluckFromQueryCache(CACHE_KEY, 'id');
+
+```
+
+
+#### setOrDeleteCacheBucket
+Checks for an existing record matching `cacheKey`, and sets it to `items` if `items` 
+is a populated list. If `items` is falsy or an empty array, `cacheKey` will be deleted.
+
+```js
+
+// See internal usage from pluckFromQueryCache method: 
+
+var pluckFromQueryCache = R.curry(function(redisClient, cacheKey, identifierProperty, item) {
+  return getItem(redisClient, cacheKey)
+    .then(JSON.parse)
+    .then(R.defaultTo([]))
+    .then(listUtils.filterOutObject(identifierProperty, R.prop(identifierProperty, item)))
+    .then(setOrDeleteCacheBucket(redisClient, cacheKey))
+    .thenResolve(item)
+    .catch(R.always(item));
+});
+
+
+```
