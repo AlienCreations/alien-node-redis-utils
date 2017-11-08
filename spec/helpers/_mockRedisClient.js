@@ -1,8 +1,8 @@
 'use strict';
 
-var constants = require('./_constants');
+const constants = require('./_constants');
 
-var _get = function(cacheKey, callback) {
+const _get = (cacheKey, callback) => {
   if (cacheKey === constants.FAKE_CACHE_KEY_EXISTS) {
     return callback(undefined, constants.FAKE_ITEM);
   } else {
@@ -10,17 +10,13 @@ var _get = function(cacheKey, callback) {
   }
 };
 
-var _del = _get;
+const _del = _get;
 
-var _set = function(cacheKey, stringifiedData) {
-  return cacheKey;
-};
+const _set = (cacheKey, stringifiedData) => cacheKey;
 
-var _expire = function(cacheKey, ttl) {
-  return cacheKey;
-};
+const _expire = (cacheKey, ttl) => cacheKey;
 
-var _keys = function(cacheKey, callback) {
+const _keys = (cacheKey, callback) => {
   if (cacheKey === constants.FAKE_CACHE_KEY_EXISTS) {
     return callback(undefined, [cacheKey]);
   } else {
@@ -28,12 +24,12 @@ var _keys = function(cacheKey, callback) {
   }
 };
 
-var mockRedisClient = {
-  'get'     : _get,
-  'del'     : _del,
-  'set'     : _set,
-  'keys'    : _keys,
-  'expire'  : _expire
+const mockRedisClient = {
+  'get'    : _get,
+  'del'    : _del,
+  'set'    : _set,
+  'keys'   : _keys,
+  'expire' : _expire
 };
 
 module.exports = mockRedisClient;

@@ -1,7 +1,6 @@
 'use strict';
 
-var R               = require('ramda'),
-    keys            = require('../lib/methods/keys'),
+const keys            = require('../lib/methods/keys'),
     constants       = require('./helpers/_constants'),
     mockRedisClient = require('./helpers/_mockRedisClient');
 

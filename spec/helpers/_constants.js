@@ -1,6 +1,6 @@
 'use strict';
 
-var constants = {
+const constants = {
   FAKE_CACHE_KEY_EXISTS     : 'exists',
   FAKE_CACHE_KEY_NOT_EXISTS : 'notexists',
   FAKE_CACHE_KEY_INVALID    : 123,
