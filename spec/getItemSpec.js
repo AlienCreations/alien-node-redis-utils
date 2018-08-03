@@ -6,7 +6,7 @@ const getItem         = require('../lib/methods/getItem'),
 
 describe('getItem', () => {
 
-  it('should assume a recognized cache key will trigger a success callback from the RedisClient and resolve', done => {
+  it('assumes a recognized cache key will trigger a success callback from the RedisClient and resolve', done => {
     getItem(mockRedisClient, constants.FAKE_CACHE_KEY_EXISTS)
       .then(item => {
         expect(item).toBe(constants.FAKE_ITEM);
@@ -14,7 +14,7 @@ describe('getItem', () => {
       });
   });
 
-  it('should assume an unrecognized cache key will trigger an error callback from the RedisClient and reject', done => {
+  it('assumes an unrecognized cache key will trigger an error callback from the RedisClient and reject', done => {
     getItem(mockRedisClient, constants.FAKE_CACHE_KEY_NOT_EXISTS)
       .catch(item => {
         expect(item).toBe(constants.FAKE_ERR);
@@ -22,7 +22,7 @@ describe('getItem', () => {
       });
   });
 
-  it('should throw an error when given a cacheKey of type other than String', () => {
+  it('throws an error when given a cacheKey of type other than String', () => {
     expect(() => {
       getItem(mockRedisClient, constants.FAKE_CACHE_KEY_INVALID);
     }).toThrow(new Error('Illegal value for parameter: cacheKey'));

@@ -6,7 +6,7 @@ const keys            = require('../lib/methods/keys'),
 
 describe('keys', function() {
 
-  it('should accept a known key and return all recognized cache keys and resolve with an array containing the key', function(done) {
+  it('accepts a known key and return all recognized cache keys and resolve with an array containing the key', function(done) {
     keys(mockRedisClient, constants.FAKE_CACHE_KEY_EXISTS)
       .then(function(res) {
         expect(res).toEqual([constants.FAKE_CACHE_KEY_EXISTS]);
@@ -14,7 +14,7 @@ describe('keys', function() {
       });
   });
 
-  it('should accept an unknown key and return an empty array', function(done) {
+  it('accepts an unknown key and return an empty array', function(done) {
     keys(mockRedisClient, constants.FAKE_CACHE_KEY_NOT_EXISTS)
       .then(function(item) {
         expect(item).toEqual([]);
@@ -22,7 +22,7 @@ describe('keys', function() {
       });
   });
 
-  it('should throw an error when given a cacheKey of type other than String', function() {
+  it('throws an error when given a cacheKey of type other than String', function() {
     expect(function(){
       keys(mockRedisClient, constants.FAKE_CACHE_KEY_INVALID);
     }).toThrow(new Error('Illegal value for parameter: cacheKey'));

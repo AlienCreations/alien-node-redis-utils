@@ -1,13 +1,12 @@
 {
   "name": "alien-node-redis-utils",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Helper functions for Redis cache on NodeJS",
   "main": "lib/Cache.js",
   "dependencies": {
     "alien-node-list-utils": "*",
     "alien-node-q-utils": "*",
     "o-validator": "^0.2.x",
-    "q": "^2.x.x",
     "ramda": "^0.25.0"
   },
   "devDependencies": {
