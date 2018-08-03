@@ -12,7 +12,7 @@ const _get = (cacheKey, callback) => {
 
 const _del = _get;
 
-const _set = (cacheKey, stringifiedData) => cacheKey;
+const _set = (cacheKey, stringifiedData, exFlag, expTime, callback) => callback(null, cacheKey);
 
 const _keys = (cacheKey, callback) => {
   if (cacheKey === constants.FAKE_CACHE_KEY_EXISTS) {
