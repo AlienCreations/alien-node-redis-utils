@@ -1,6 +1,6 @@
 {
   "name": "alien-node-redis-utils",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Helper functions for Redis cache on NodeJS",
   "main": "lib/Cache.js",
   "dependencies": {
